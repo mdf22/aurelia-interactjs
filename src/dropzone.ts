@@ -1,5 +1,5 @@
 import { inject } from 'aurelia-framework';
-import * as Interact from 'interact';
+import * as Interact from 'interactjs';
 import InteractBase from './interact-base';
 
 @inject(Element, Interact)
@@ -10,7 +10,7 @@ export class DropzoneCustomAttribute extends InteractBase {
    */
   private defaults = {
     accept: '.draggable',
-    overlap: .5,
+    overlap: .5
   };
 
   public bind() {
@@ -38,7 +38,7 @@ export class DropzoneCustomAttribute extends InteractBase {
             this.element.dispatchEvent(
               new CustomEvent('drop', {
                 bubbles: true,
-                detail: event.relatedTarget.au.draggable.viewModel.value,
+                detail: event.relatedTarget.au.draggable.viewModel.value
               })
             );
           }

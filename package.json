@@ -1,6 +1,6 @@
 {
   "name": "aurelia-interactjs",
-  "version": "2.0.7",
+  "version": "3.0.1",
   "description": "Plugin to use interact.js with Aurelia.",
   "keywords": [
     "aurelia",
@@ -14,82 +14,34 @@
   },
   "license": "MIT",
   "author": "Erik Lieben <erik.lieben@gmail.com> (https://www.eriklieben.com/)",
-  "main": "dist/amd/index.js",
+  "main": "dist/commonjs/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/eriklieben/aurelia-interactjs"
   },
   "scripts": {
-    "postinstall": "node ./install/post-install.js"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "cross-env rimraf .tmp .nyc_output coverage dist",
+    "lint": "cross-env tslint --project tsconfig.json --config tslint.json",
+    "build": "npm run clean && concurrently  \"npm run build:es2015\" \"npm run build:commonjs\" \"npm run build:amd\" \"npm run build:native\"",
+    "build:es2015": "cross-env  tsc --project tsconfig.json --rootDir src/ --outDir ./dist/es2015 --module es2015 --target es2015 -d",
+    "build:commonjs": "cross-env  tsc --project tsconfig.json --rootDir src/ --outDir ./dist/commonjs --module commonjs -d",
+    "build:amd": "cross-env  tsc --project tsconfig.json --rootDir src/ --outDir ./dist/amd --module amd -d",
+    "build:native": "cross-env  tsc --project tsconfig.json --rootDir src/ --outDir ./dist/native-modules --module es2015 --target es2015 -d"
   },
   "devDependencies": {
-    "aurelia-tools": "^0.2.4",
-    "babel": "^6.5.2",
-    "babel-eslint": "^6.1.2",
-    "babel-plugin-syntax-flow": "^6.8.0",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-plugin-transform-es2015-modules-amd": "^6.8.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.11.5",
-    "babel-plugin-transform-es2015-modules-systemjs": "^6.11.6",
-    "babel-plugin-transform-flow-strip-types": "^6.8.0",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-es2015-loose": "^7.0.0",
-    "babel-preset-stage-1": "^6.5.0",
-    "conventional-changelog": "1.1.0",
-    "del": "^2.2.1",
-    "es-module-loader": "^1.2.0",
-    "gulp": "^3.9.1",
-    "gulp-bump": "^2.2.0",
-    "gulp-changed": "^1.3.1",
-    "gulp-conventional-changelog": "^1.1.0",
-    "gulp-eslint": "^3.0.1",
-    "gulp-plumber": "^1.1.0",
-    "gulp-sourcemaps": "^1.6.0",
-    "gulp-tslint": "^6.1.1",
-    "gulp-typescript": "^2.13.6",
-    "gulp-yuidoc": "^0.1.2",
-    "isparta": "^4.0.0",
-    "istanbul": "^1.0.0-alpha.2",
-    "jasmine-core": "^2.4.1",
-    "karma": "^1.1.2",
-    "karma-babel-preprocessor": "^6.0.1",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-coverage": "^1.1.1",
-    "karma-jasmine": "^1.0.2",
-    "karma-jspm": "2.2.0",
-    "karma-phantomjs-launcher": "^1.0.1",
-    "karma-systemjs": "^0.14.0",
-    "object.assign": "^4.0.4",
-    "phantomjs-prebuilt": "^2.1.10",
-    "require-dir": "^0.3.0",
-    "run-sequence": "^1.2.2",
-    "systemjs": "^0.19.36",
-    "tslint": "^3.15.1",
-    "typescript": "^2.0.2",
-    "vinyl-paths": "^2.1.0",
-    "yargs": "^5.0.0"
-  },
-  "jspm": {
-    "registry": "npm",
-    "main": "index",
-    "format": "amd",
-    "jspmNodeConversion": false,
-    "directories": {
-      "dist": "dist/amd"
-    },
-    "dependencies": {
-      "aurelia-framework": "^1.0.7",
-      "interact": "npm:interact.js@^1.2.6"
-    },
-    "devDependencies": {
-      "aurelia-polyfills": "^1.0.0-beta.1.1.0"
-    }
+    "concurrently": "^5.1.0",
+    "copyfiles": "^2.2.0",
+    "cross-env": "^7.0.0",
+    "node-sass": "^4.13.1",
+    "rimraf": "^3.0.2",
+    "tsdoc": "0.0.4",
+    "tslint": "^6.0.0",
+    "typescript": "^3.7.5"
   },
   "dependencies": {
-    "aurelia-framework": "^1.0.2",
-    "interact.js": "^1.2.6"
-  },
-  "peerDependencies": {
-    "interact.js": "^1.2.6"
+    "aurelia-framework": "^1.3.1",
+    "aurelia-pal": "^1.8.2",
+    "interactjs": "^1.8.4"
   }
 }

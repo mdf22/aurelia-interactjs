@@ -1,6 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
-    var InteractBase = (function () {
+    Object.defineProperty(exports, "__esModule", { value: true });
+    var InteractBase = /** @class */ (function () {
         function InteractBase(element, interact) {
             this.element = element;
             this.interact = interact;
@@ -16,13 +17,14 @@ define(["require", "exports"], function (require, exports) {
         InteractBase.prototype.dispatch = function (name, data) {
             this.element.dispatchEvent(new CustomEvent(name, {
                 bubbles: true,
-                detail: data,
+                detail: data
             }));
         };
         InteractBase.prototype.getInteractableOptions = function () {
             return this.hasInteractableOptionsKey() ? this.value.interactable : undefined;
         };
         InteractBase.prototype.getActionOptions = function (defaults) {
+            // If the interactable options are defined but the action ones aren't don't use them by mistake! :-)
             var valueIfNoInteractable = (!this.hasInteractableOptionsKey() ? this.value : undefined);
             var actionOptions = (this.value && this.hasActionOptionsKey()) ? this.value.action : valueIfNoInteractable;
             return Object.assign({}, actionOptions || (defaults || {}));
@@ -35,8 +37,5 @@ define(["require", "exports"], function (require, exports) {
         };
         return InteractBase;
     }());
-    Object.defineProperty(exports, "__esModule", { value: true });
     exports.default = InteractBase;
 });
-
-//# sourceMappingURL=interact-base.js.map

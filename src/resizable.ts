@@ -1,5 +1,5 @@
 import { inject } from 'aurelia-framework';
-import * as Interact from 'interact';
+import * as Interact from 'interactjs';
 import InteractBase from './interact-base';
 
 @inject(Element, Interact)
@@ -35,7 +35,7 @@ export class ResizableCustomAttribute extends InteractBase {
           x += event.deltaRect.left;
           y += event.deltaRect.top;
 
-          target.style.webkitTransform = target.style.transform =
+          target.style.transform =
             'translate(' + x + 'px,' + y + 'px)';
 
           target.setAttribute('data-x', x);

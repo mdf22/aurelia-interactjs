@@ -26,7 +26,7 @@ export default class InteractBase {
     this.element.dispatchEvent(
       new CustomEvent(name, {
         bubbles: true,
-        detail: data,
+        detail: data
       })
     );
   }

@@ -5,21 +5,21 @@ export * from './interact-dropzone';
 export * from './interact-gesturable';
 export * from './interact-resizable';
 export * from './resizable';
-import * as Interact from 'interact';
-
+import * as Interact from 'interactjs';
+import {PLATFORM} from 'aurelia-pal';
 export function configure(aurelia, options) {
   aurelia.container.registerInstance(Interact, Interact);
   let attributes = [
-    './interact-draggable',
-    './interact-dropzone',
-    './interact-gesturable',
-    './interact-resizable',
-    './resizable',
+    PLATFORM.moduleName('./interact-draggable'),
+    PLATFORM.moduleName('./interact-dropzone'),
+    PLATFORM.moduleName('./interact-gesturable'),
+    PLATFORM.moduleName('./interact-resizable'),
+    PLATFORM.moduleName('./resizable'),
   ];
 
   if (options && options.enableDragDropAttributes === true) {
-    attributes.push('./draggable');
-    attributes.push('./dropzone');
+    attributes.push(PLATFORM.moduleName('./draggable'));
+    attributes.push(PLATFORM.moduleName('./dropzone'));
   }
 
   aurelia.globalResources(attributes);
